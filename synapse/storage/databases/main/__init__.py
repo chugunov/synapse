@@ -198,6 +198,9 @@ class DataStore(
             prefilled_cache=curr_state_delta_prefill,
         )
 
+        # Register a legacy groups background update as a no-op.
+        database.updates.register_noop_background_update("local_group_updates_index")
+
         _group_updates_prefill, min_group_updates_id = self.db_pool.get_cache_dict(
             db_conn,
             "local_group_updates",
